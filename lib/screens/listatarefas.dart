@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tarefa/components/Task.dart';
 
 class Listatarefas extends StatefulWidget {
   const Listatarefas({super.key});
@@ -19,6 +18,23 @@ class _ListatarefasState extends State<Listatarefas> {
     super.dispose();
   }
 
+  void _adicionarTarefa() {
+    String novaTarefa = _controller.text.trim();
+    if (novaTarefa.isNotEmpty) {
+      setState(() {
+        _tarefas.add(novaTarefa);
+        _controller.clear();
+      });
+    }
+  }
+
+  void _removerTarefa(int index) {
+    setState(() {
+      _tarefas.removeAt(index);
+      _selecionadaIndex = null;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +47,7 @@ class _ListatarefasState extends State<Listatarefas> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   "Adicione uma Tarefa:",
                   style: TextStyle(
                     fontSize: 20,
@@ -56,18 +72,47 @@ class _ListatarefasState extends State<Listatarefas> {
                         shape: const CircleBorder(),
                         padding: const EdgeInsets.all(20),
                       ),
-                      onPressed: () {
-                        String novaTarefa = _controller.text.trim();
-                        if (novaTarefa.isNotEmpty) {
-                          print('Tarefa adicionada: $novaTarefa');
-                          _controller.clear();
-                        }
-                      },
+                      onPressed: _adicionarTarefa,
                       child: const Icon(Icons.add),
                     ),
                   ],
                 ),
               ],
+            ),
+            const SizedBox(height: 20),
+            Expanded(
+              child: ListView.builder(
+                itemCount: _tarefas.length,
+                itemBuilder: (context, index) {
+                  final tarefa = _tarefas[index];
+                  final selecionada = index == _selecionadaIndex;
+
+                  return GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _selecionadaIndex = selecionada ? null : index;
+                      });
+                    },
+                    child: Row(
+                      children: [
+                        const Icon(Icons.check_box_outline_blank),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            tarefa,
+                            style: const TextStyle(fontSize: 18),
+                          ),
+                        ),
+                        if (selecionada)
+                          IconButton(
+                            icon: const Icon(Icons.cancel_outlined),
+                            onPressed: () => _removerTarefa(index),
+                          ),
+                      ],
+                    ),
+                  );
+                },
+              ),
             ),
           ],
         ),
