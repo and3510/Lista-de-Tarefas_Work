@@ -9,21 +9,53 @@ class Listatarefas extends StatefulWidget {
 }
 
 class _ListatarefasState extends State<Listatarefas> {
+  final TextEditingController _controller = TextEditingController();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Lista de Tarefas'),
       ),
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget> [
-            ElevatedButton(
-              onPressed: () {
-                // Ação ao pressionar o botão
-              },
-              child: const Text('Adicionar Tarefa'),
+          children: <Widget>[
+            const SizedBox(height: 16),
+            Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: _controller,
+                    decoration: const InputDecoration(
+                      labelText: 'Nova tarefa',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    shape: const CircleBorder(),
+                    padding: const EdgeInsets.all(20), 
+                    
+                  ),
+                  onPressed: () {
+                    String novaTarefa = _controller.text.trim();
+                    if (novaTarefa.isNotEmpty) {
+                      print('Tarefa adicionada: $novaTarefa');
+                      _controller.clear();
+                    }
+                  },
+                  child: const Icon(Icons.add),
+                ),
+              ],
             ),
           ],
         ),
