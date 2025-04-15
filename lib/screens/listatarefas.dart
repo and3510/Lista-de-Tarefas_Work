@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tarefa/components/Task.dart';
 
 class Listatarefas extends StatefulWidget {
   const Listatarefas({super.key});
@@ -17,10 +18,7 @@ class _ListatarefasState extends State<Listatarefas> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'Você tem 0 tarefas pendentes',
-            ),
+          children: <Widget> [
             ElevatedButton(
               onPressed: () {
                 // Ação ao pressionar o botão
