@@ -12,7 +12,7 @@ class Task extends StatefulWidget {
 }
 
 class _TaskState extends State<Task> {
-  bool _isDone = false; // Variável de estado para controlar se a tarefa está feita
+  bool _isDone = true; // Variável de estado para controlar se a tarefa está feita
 
 
   @override
