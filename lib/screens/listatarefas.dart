@@ -20,39 +20,50 @@ class _ListatarefasState extends State<Listatarefas> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Lista de Tarefas'),
-      ),
+      appBar: AppBar(title: const Text('Lista de Tarefas')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
             const SizedBox(height: 16),
-            Row(
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
-                  child: TextField(
-                    controller: _controller,
-                    decoration: const InputDecoration(
-                      labelText: 'Nova tarefa',
-                      border: OutlineInputBorder(),
-                    ),
+                Text(
+                  "Adicione uma Tarefa:",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
                   ),
                 ),
-                const SizedBox(width: 10),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    shape: const CircleBorder(),
-                    padding: const EdgeInsets.all(20), 
-                  ),
-                  onPressed: () {
-                    String novaTarefa = _controller.text.trim();
-                    if (novaTarefa.isNotEmpty) {
-                      print('Tarefa adicionada: $novaTarefa');
-                      _controller.clear();
-                    }
-                  },
-                  child: const Icon(Icons.add),
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: _controller,
+                        decoration: const InputDecoration(
+                          labelText: 'Nova tarefa',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: const CircleBorder(),
+                        padding: const EdgeInsets.all(20),
+                      ),
+                      onPressed: () {
+                        String novaTarefa = _controller.text.trim();
+                        if (novaTarefa.isNotEmpty) {
+                          print('Tarefa adicionada: $novaTarefa');
+                          _controller.clear();
+                        }
+                      },
+                      child: const Icon(Icons.add),
+                    ),
+                  ],
                 ),
               ],
             ),
