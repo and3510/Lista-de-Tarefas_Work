@@ -10,6 +10,8 @@ class Listatarefas extends StatefulWidget {
 
 class _ListatarefasState extends State<Listatarefas> {
   final TextEditingController _controller = TextEditingController();
+  final List<String> _tarefas = [];
+  int? _selecionadaIndex;
 
   @override
   void dispose() {
