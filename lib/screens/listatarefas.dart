@@ -44,7 +44,6 @@ class _ListatarefasState extends State<Listatarefas> {
                   style: ElevatedButton.styleFrom(
                     shape: const CircleBorder(),
                     padding: const EdgeInsets.all(20), 
-                    
                   ),
                   onPressed: () {
                     String novaTarefa = _controller.text.trim();
